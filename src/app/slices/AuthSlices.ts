@@ -1,21 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isDataView } from "util/types";
 
 interface authInitialState {
     userInfo: {
         uid:string,
         email:string,
         name:string
-    } | undefined
+    } | undefined;
+
+    isDarkTheme: false,
 }
 
 const initialState: authInitialState = {
-    userInfo: undefined
+    userInfo: undefined,
+    isDarkTheme: false,
 };
 
 export const authSlice = createSlice({
     name:"auth",
     initialState,
     reducers:{
+        changeTheme:(state, action) => {
+            state.isDarkTheme = action.payload.isDarkTheme
+        },
         setUser:(state,action) => {
             state.userInfo = action.payload;
         }
@@ -23,4 +30,4 @@ export const authSlice = createSlice({
 })
 
 
-export const {setUser} = authSlice.actions;
+export const {setUser, changeTheme} = authSlice.actions;
